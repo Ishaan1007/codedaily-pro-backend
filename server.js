@@ -16,6 +16,7 @@ app.get("/api/explain", async (req, res) => {
 Include 3 key points, one short example code snippet, and one short practice question.`;
 
   try {
+    console.log("🔹 API route hit with topic:", topic);
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
