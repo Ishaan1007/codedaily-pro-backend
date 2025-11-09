@@ -45,7 +45,9 @@ app.get("/api/explain", async (req, res) => {
 
     const data = await response.json();
 
-    // ✅ Safely extract the text
+    // 🧠 NEW: Add this log to see what Gemini sends back
+    console.log("🔍 Gemini raw response:", JSON.stringify(data, null, 2));
+
     const resultText =
       data?.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No response from Gemini.";
@@ -56,9 +58,4 @@ app.get("/api/explain", async (req, res) => {
     console.error("❌ Error connecting to Gemini API:", error);
     res.json({ result: "Error connecting to Gemini API." });
   }
-});
-
-// ✅ Start the server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
 });
