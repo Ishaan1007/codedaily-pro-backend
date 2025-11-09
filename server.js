@@ -13,7 +13,6 @@ app.get("/", (req, res) => {
   res.send("🚀 CodeDaily Pro Backend (Gemini AI) is Live!");
 });
 
-// ✅ Main AI route
 app.get("/api/explain", async (req, res) => {
   const topic = req.query.topic || "Variables in C";
   console.log(`🧠 API route hit with topic: ${topic}`);
@@ -30,11 +29,7 @@ app.get("/api/explain", async (req, res) => {
             {
               parts: [
                 {
-                  text: `Explain the topic "${topic}" in simple terms.
-                  Format your answer as:
-                  1. 🪄 Three key points.
-                  2. 💻 One short beginner-friendly code example.
-                  3. ❓ One practice question.`
+                  text: `Explain the topic "${topic}" in clear simple steps with three key points, one code example, and one practice question.`
                 }
               ]
             }
@@ -45,15 +40,19 @@ app.get("/api/explain", async (req, res) => {
 
     const data = await response.json();
 
-    // 🧠 NEW: Add this log to see what Gemini sends back
-    console.log("🔍 Gemini raw response:", JSON.stringify(data, null, 2));
+    // Print the raw Gemini response in Render logs
+    console.log("🔍 Full Gemini response:", JSON.stringify(data, null, 2));
 
-    const resultText =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from Gemini.";
+    let resultText = "No response from Gemini.";
 
-    console.log("✅ AI Response Generated");
+    if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+      resultText = data.candidates[0].content.parts[0].text;
+    } else if (data?.error) {
+      resultText = `Error: ${data.error.message}`;
+    }
+
     res.json({ result: resultText });
+    console.log("✅ AI Response Generated");
   } catch (error) {
     console.error("❌ Error connecting to Gemini API:", error);
     res.json({ result: "Error connecting to Gemini API." });
