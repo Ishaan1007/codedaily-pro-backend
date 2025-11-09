@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch";
+import fetch from "node-fetch"; // ✅ works fine with ESM
 
 const app = express();
 const PORT = process.env.PORT || 10000;
