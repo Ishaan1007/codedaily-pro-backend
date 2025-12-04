@@ -294,7 +294,7 @@
 
 <script>
   // 🔑 1) PUT YOUR HUGGING FACE API KEY HERE:
-  const HF_API_KEY = "YOUR_HF_API_KEY_HERE"; // e.g. "hf_xxxxxxxxxxxxxxxxx"
+  const HF_API_KEY = ""; // e.g. "hf_xxxxxxxxxxxxxxxxx"
 
   const modelUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
 
@@ -333,7 +333,7 @@
       return;
     }
 
-    if (!HF_API_KEY || HF_API_KEY === "YOUR_HF_API_KEY_HERE") {
+    if (!HF_API_KEY || HF_API_KEY === "") {
       alert("Please set your Hugging Face API key inside the JS (HF_API_KEY).");
       return;
     }
