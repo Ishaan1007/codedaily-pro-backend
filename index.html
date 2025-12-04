@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Roadmap AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 18px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      padding: 24px 20px 20px;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: conic-gradient(from 180deg, #22d3ee, #a855f7, #f97316, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      font-size: 20px;
+    }
+
+    .title-group h1 {
+      font-size: 22px;
+      color: #f9fafb;
+    }
+
+    .title-group p {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .input-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr);
+      gap: 10px;
+    }
+
+    label {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    select, input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+    }
+
+    select:focus, input[type="text"]:focus, textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .chips {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      cursor: pointer;
+      color: #9ca3af;
+    }
+
+    .chip:hover {
+      border-color: #38bdf8;
+      color: #e5e7eb;
+    }
+
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+    }
+
+    .status {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 14px 14px 12px;
+      background: #020617;
+      border-radius: 12px;
+      border: 1px solid #111827;
+      max-height: 420px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    .result h2 {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #f9fafb;
+    }
+
+    .result small {
+      display: block;
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    @media (max-width: 720px) {
+      .app {
+        padding: 16px 14px;
+      }
+      .input-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <div class="app-header">
+    <div class="logo">R</div>
+    <div class="title-group">
+      <h1>Code Roadmap AI</h1>
+      <p>Type a coding goal and get a clear, step-by-step learning path.</p>
+    </div>
+  </div>
+
+  <div class="input-row">
+    <div>
+      <label for="preset">Popular coding goals</label>
+      <select id="preset">
+        <option value="">Choose (optional)</option>
+        <option value="Complete roadmap to become a modern frontend developer with React.">
+          Frontend Developer (HTML, CSS, JS, React)
+        </option>
+        <option value="Complete roadmap to become a MERN full stack web developer.">
+          Full-Stack Developer (MERN)
+        </option>
+        <option value="Complete roadmap to master DSA and competitive programming in C++ for coding interviews.">
+          DSA + Competitive Programming
+        </option>
+        <option value="Complete roadmap to become a Python backend developer with Django or FastAPI.">
+          Python Backend Developer
+        </option>
+        <option value="Complete roadmap to become a data analyst using Python, SQL and basic ML.">
+          Data Analyst with Python
+        </option>
+        <option value="Complete roadmap to become an Android app developer using Kotlin.">
+          Android Developer (Kotlin)
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="customGoal">Or describe your coding goal</label>
+      <input
+        type="text"
+        id="customGoal"
+        placeholder="e.g. I want to become a React + Next.js frontend developer"
+      />
+      <div class="chips">
+        <div class="chip" data-chip="Become a junior frontend developer in 6 months with projects.">
+          Junior frontend in 6 months
+        </div>
+        <div class="chip" data-chip="Crack product based company coding interviews with DSA in Java.">
+          Crack coding interviews
+        </div>
+        <div class="chip" data-chip="Learn full stack web development enough to freelance and earn.">
+          Freelance full-stack
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;">
+    <label for="extra">Optional details (your level, time per day, etc.)</label>
+    <textarea id="extra" placeholder="Example: I know basic HTML + C, can study 2 hours daily, want job-ready roadmap."></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" id="generateBtn">
+      ⚡ Generate Roadmap
+    </button>
+    <button class="btn-secondary" id="copyBtn">
+      📋 Copy roadmap
+    </button>
+    <span class="status" id="statusText"></span>
+  </div>
+
+  <div class="result" id="resultBox">
+    <h2>Roadmap will appear here 👇</h2>
+    <small>Tip: Start with 1–2 stages only. Consistency & revision matter more than speed.</small>
+    <div id="resultContent"></div>
+  </div>
+
+  <div class="footer">
+    <span>Made for coding goals only • Plan → Learn → Build projects</span>
+    <span>API: Hugging Face Inference (free)</span>
+  </div>
+</div>
+
+<script>
+  // 🔑 1) PUT YOUR HUGGING FACE API KEY HERE:
+  const HF_API_KEY = "YOUR_HF_API_KEY_HERE"; // e.g. "hf_xxxxxxxxxxxxxxxxx"
+
+  const modelUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
+
+  const presetSelect   = document.getElementById("preset");
+  const customGoal     = document.getElementById("customGoal");
+  const extraTextarea  = document.getElementById("extra");
+  const generateBtn    = document.getElementById("generateBtn");
+  const copyBtn        = document.getElementById("copyBtn");
+  const statusText     = document.getElementById("statusText");
+  const resultBox      = document.getElementById("resultBox");
+  const resultContent  = document.getElementById("resultContent");
+
+  // When preset changes, fill the custom input (can still edit)
+  presetSelect.addEventListener("change", () => {
+    if (presetSelect.value && !customGoal.value) {
+      customGoal.value = presetSelect.options[presetSelect.selectedIndex].text;
+    }
+  });
+
+  // Clickable chips to quickly fill goal
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      customGoal.value = chip.getAttribute("data-chip");
+    });
+  });
+
+  generateBtn.addEventListener("click", async () => {
+    const presetText = presetSelect.value;
+    const customText = customGoal.value.trim();
+    const extraText  = extraTextarea.value.trim();
+
+    const finalGoal = customText || presetText;
+
+    if (!finalGoal) {
+      alert("Please choose a preset or type your coding goal.");
+      return;
+    }
+
+    if (!HF_API_KEY || HF_API_KEY === "YOUR_HF_API_KEY_HERE") {
+      alert("Please set your Hugging Face API key inside the JS (HF_API_KEY).");
+      return;
+    }
+
+    statusText.textContent = "Thinking… generating coding roadmap";
+    generateBtn.disabled = true;
+    generateBtn.textContent = "⏳ Generating…";
+
+    resultContent.textContent = "";
+
+    const fullPrompt = `
+You are an expert software mentor.
+
+Create a very clear, structured, step-by-step ROADMAP only for CODING / SOFTWARE / TECH learning.
+
+User goal:
+"${finalGoal}"
+
+Extra details (if any):
+"${extraText || "none"}"
+
+Rules:
+- Focus 100% on coding, software, CS and related skills.
+- Organize roadmap into stages like: Phase 1, Phase 2, etc.
+- For each phase: give
+  - Title
+  - Duration estimate (e.g. 2–3 weeks)
+  - What to learn (topics / concepts)
+  - Practice tasks or mini-projects
+- Keep it practical and realistic for a self-learner.
+- Add a final section "Projects & Portfolio" and "How to revise & stay consistent".
+`;
+
+    try {
+      const response = await fetch(modelUrl, {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + HF_API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          inputs: fullPrompt,
+          options: { wait_for_model: true }
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error("API error: " + errorText);
+      }
+
+      const data = await response.json();
+
+      // Hugging Face often returns an array [{ generated_text: "..." }]
+      let text = "";
+      if (Array.isArray(data) && data[0] && data[0].generated_text) {
+        text = data[0].generated_text;
+      } else if (data.generated_text) {
+        text = data.generated_text;
+      } else {
+        text = JSON.stringify(data, null, 2);
+      }
+
+      // Remove the prompt echo if present
+      if (text.includes("User goal:")) {
+        const idx = text.indexOf("User goal:");
+        if (idx > 0) text = text.slice(idx);
+      }
+
+      resultContent.textContent = text;
+      statusText.textContent = "Done ✅ — adjust roadmap to your level and start with Phase 1.";
+    } catch (err) {
+      console.error(err);
+      resultContent.textContent = "Error while generating roadmap:\n" + err.message;
+      statusText.textContent = "Failed ❌";
+    } finally {
+      generateBtn.disabled = false;
+      generateBtn.textContent = "⚡ Generate Roadmap";
+    }
+  });
+
+  copyBtn.addEventListener("click", async () => {
+    const text = resultContent.textContent.trim();
+    if (!text) {
+      alert("No roadmap to copy yet.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      statusText.textContent = "Roadmap copied to clipboard ✅";
+      setTimeout(() => {
+        statusText.textContent = "";
+      }, 2000);
+    } catch (err) {
+      alert("Could not copy. Error: " + err.message);
+    }
+  });
+</script>
+
+</body>
+</html>
