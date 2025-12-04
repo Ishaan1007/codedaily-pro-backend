@@ -368,17 +368,11 @@ Rules:
 `;
 
     try {
-      const response = await fetch(modelUrl, {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + HF_API_KEY,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          inputs: fullPrompt,
-          options: { wait_for_model: true }
-        })
-      });
+      const response = await fetch("/api/roadmap", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt: fullPrompt })
+});
 
       if (!response.ok) {
         const errorText = await response.text();
